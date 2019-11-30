@@ -16,6 +16,8 @@ lib-cov
 
 # Directory for all generated data
 data
+.DS_Store
+
 
 # Coverage directory used by tools like istanbul
 coverage
