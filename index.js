@@ -3,12 +3,12 @@ var $ = require("cheerio");
 var express = require("express");
 var bodyParser = require("body-parser");
 var extractPlaylist = require("./functions/extractPlaylist");
-var writeData=require("./functions/writeData")
+var writeData = require("./functions/writeData");
 
 
 var app = express();
-var host = "0.0.0.0"/*process.env.HOST || "127.0.0.0"*/;
-var port= 3030
+var host = "0.0.0.0";
+var port = 3030;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,9 +40,11 @@ app.get("/playlist", (req, res) => {
     .then(() => {
       writeData("playlist", templateToWrite[0], ".m3u");
     })
+  .then(()=>{setTimeout(()=>{console.log(`asked for playlist at ${new Date().toTimeString()}`)
+  res.download("./data/playlist.m3u", "playlist.m3u")},2000)})
     .catch(err => console.log("error in /playlist", err))
-  console.log(`asked for playlist at ${new Date().toTimeString()}`)
-  res.download("./data/playlist.m3u", "playlist.m3u");
+  
+  
 });
 
 var link = "http://telego477.com";
@@ -60,18 +62,7 @@ rp(link)
       tr++
     ) {
       for (var td = 1; td < 5; td++) {
-        /*         console.log(
-          "channel image",
-          $(
-            "#main > div > div.layout-wrapper > div > div > div.layout-cell.content > article:nth-child(1) > div > div > table:nth-child(2) > tbody > tr:nth-child(" +
-              tr +
-              ") > td:nth-child(" +
-              td +
-              ")  > div > a > div:nth-child(1) > img",
-            html
-          ).attr("src")
-        ); */
-        arrOfLinks.push([
+          arrOfLinks.push([
           link +
             $(
               "#main > div > div.layout-wrapper > div > div > div.layout-cell.content > article:nth-child(1) > div > div > table:nth-child(2) > tbody > tr:nth-child(" +

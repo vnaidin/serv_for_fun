@@ -16,6 +16,8 @@ lib-cov
 
 # Directory for all generated data
 data
+
+# MacOSX directory
 .DS_Store
 
 

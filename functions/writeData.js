@@ -1,5 +1,4 @@
 const fs = require("fs");
-const d = new Date();
 
 module.exports = (name, data, fileType) => {
   switch (fileType) {
@@ -9,7 +8,7 @@ module.exports = (name, data, fileType) => {
           console.log("Error writing files", err);
         } else {
           console.log(
-            `Successfully wrote file ${fileType} at ${d.toTimeString()}`
+            `Successfully wrote file ${fileType} at ${new Date().toTimeString()}`
           );
         }
       });
