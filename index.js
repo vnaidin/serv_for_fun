@@ -22,7 +22,8 @@ var allowCrossDomain = (req, res, next) => {
 
 app.use(allowCrossDomain);
 
-app.listen( port,host, function(){console.log(`listening on ${host} :${port}`)});
+app.listen( port,host, function(){
+console.log(`Server started at ${new Date().toTimeString()} \nListening on ${host}:${port}`)});
 
 var arrOfLinks = [];
 var templateToWrite = [];
@@ -31,24 +32,15 @@ app.get("/hello", (req, res) => {
 });
 
 app.get("/playlist", (req, res) => {
-  Promise.all(arrOfLinks.map((x) => extractPlaylist(x)))
-    .then(function(values) {
-      templateToWrite.push(
-        "#EXTM3U\r\n" + values.filter(x => x !== undefined).join("")
-      );
-    })
-    .then(() => {
-      writeData("playlist", templateToWrite[0], ".m3u");
-    })
-  .then(()=>{setTimeout(()=>{console.log(`asked for playlist at ${new Date().toTimeString()}`)
-  res.download("./data/playlist.m3u", "playlist.m3u")},2000)})
-    .catch(err => console.log("error in /playlist", err))
-  
-  
+    console.log("TODO: fix problem with Ukraina and Footballs \npossible errors are: \nhttps, \nlong token with id,pid and other params \nand it is working in VLC")
+    console.log(`Requested playlist at ${new Date().toTimeString()}`);
+    console.log("Headers of requesting device:")
+    console.log(req.headers);
+    res.download("./data/playlist.m3u", "playlist.m3u")
 });
 
-var link = "http://telego477.com";
-/**FILLING THE ARRAY OF LINKS TO ALL STREAMS ON THIS WEBSITE */
+setInterval(()=>{console.log("Refreshing playlist...");
+                 var link = "http://telego477.com";
 rp(link)
   .then(html => {
     for (
@@ -90,4 +82,21 @@ rp(link)
   .catch(err => {
     console.log("err in collecting links => ", err);
   })
-  .finally(e => console.log("filled array", arrOfLinks.length));
+  .finally(e => {console.log("Scanned channels count:", arrOfLinks.length);  
+    Promise.all(arrOfLinks.map((x) => extractPlaylist(x)))
+    .then(function(values) {
+    console.log(
+        "Returned channels count:",
+        values.filter(x => x !== undefined).length
+      );
+      templateToWrite.push(
+        "#EXTM3U\r\n" + values.filter(x => x !== undefined).join("")
+      );
+    })
+    .then(() => {
+      writeData("playlist", templateToWrite[0], ".m3u");
+    })
+    .catch(err => console.log("error in /playlist", err))}); 
+arrOfLinks=[];
+templateToWrite=[];
+},1000*60*15);
