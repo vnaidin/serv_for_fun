@@ -48,8 +48,8 @@ module.exports = (link) => {
         return "https://sportbox.ws/ukrfoot1.html";
       case "Футбол 2 (Украина)":
         return "https://sportbox.ws/football2ukraine.html";
-      case "ТРК Украина":
-        return "https://sportbox.ws/ukrainetv.html";
+      /*case "ТРК Украина":
+        return "https://sportbox.ws/ukrainetv.html";*/
 
       default:
         return (

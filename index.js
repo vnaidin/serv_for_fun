@@ -22,17 +22,19 @@ var allowCrossDomain = (req, res, next) => {
 
 app.use(allowCrossDomain);
 
+/* add public folder with elementary html*/
+
 app.listen( port,host, function(){
 console.log(`Server started at ${new Date().toTimeString()} \nListening on ${host}:${port}`)});
 
+app.use(express.static('public'))/* everything that is in this folder, wil be presented => TODO: s*/
+
+
 var arrOfLinks = [];
 var templateToWrite = [];
-app.get("/hello", (req, res) => {
-  res.send("Hello World!");
-});
 
 app.get("/playlist", (req, res) => {
-    console.log("TODO: fix problem with Ukraina and Footballs \npossible errors are: \nhttps, \nlong token with id,pid and other params \nand it is working in VLC")
+    //console.log("TODO: fix problem with Ukraina and Footballs \npossible errors are: \nhttps, \nlong token with id,pid and other params \nand it is working in VLC")
     console.log(`Requested playlist at ${new Date().toTimeString()}`);
     console.log("Headers of requesting device:")
     console.log(req.headers);
