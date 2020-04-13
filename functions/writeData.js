@@ -1,6 +1,11 @@
 const fs = require("fs");
+const outDir="./data"
 
 module.exports = (name, data, fileType) => {
+if (!fs.existsSync(outDir)) {
+console.log("creating folder",outDir)
+fs.mkdirSync(outDir);
+     } 
   switch (fileType) {
     case ".m3u":
       fs.writeFile("./data/" + name + fileType, data, err => {
