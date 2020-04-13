@@ -4,11 +4,13 @@
   "description": "Experimenting with old node version, but notebook serves as real server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon index.js -w"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/vnaidin/serv_for_fun"
   },
   "author": "vnaidin",
   "license": "ISC",
@@ -17,6 +19,12 @@
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "nodemon": "^2.0.1"
+    "nodemon": "1.8.1"
+  },
+  "dependencies": {
+    "cheerio": "0.22.0",
+    "express": "4.17.1",
+    "request": "2.88.2",
+    "request-promise": "4.2.5"
   }
 }
