@@ -67,8 +67,7 @@ return rp(transformLink(link), {
         return (
           "\r\n#EXTINF:0," +
           title +
-          "\r\n" +
-          "#EXTVLCOPT:network-caching=1000\r\n" +
+          "\r\n"  +
           link +
           "\r\n"
         );
