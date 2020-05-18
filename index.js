@@ -92,7 +92,7 @@ rp(link)
         values.filter(x => x !== undefined).length
       );
       templateToWrite.push(
-        "#EXTM3U\r\n" +"#EXTINF:0,M2\r\nhttp://live.m2.tv:80/hls3/stream.m3u8"+ values.filter(x => x !== undefined).join("")
+        "#EXTM3U\r\n" +"#EXTINF:0,K1\r\nhttps://edge1.iptv.macc.com.ua/life/k1_3/index.m3u8"+"#EXTINF:0,M2\r\nhttp://live.m2.tv:80/hls3/stream.m3u8"+ values.filter(x => x !== undefined).join("")
       );
     })
     .then(() => {
