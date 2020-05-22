@@ -13,7 +13,7 @@ fs.mkdirSync(outDir);
           console.log("Error writing files", err);
         } else {
           console.log(
-            `Successfully wrote file ${fileType} at ${new Date().toTimeString()}`
+            `Successfully wrote file ${name}${fileType} at ${new Date().toTimeString()}`
           );
         }
       });

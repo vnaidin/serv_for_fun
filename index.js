@@ -13,16 +13,16 @@ var port = 3030;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var allowCrossDomain = (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DEvarE");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  next();
-};
+// var allowCrossDomain = (req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DEvarE");
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+//   next();
+// };
 
-app.use(allowCrossDomain);
+// app.use(allowCrossDomain);
 
-/* add public folder with elementary html*/
+/* TODO: add public folder with  html player, and possibility to switch the channels*/
 
 app.listen( port,host, function(){
 console.log(`Server started at ${new Date().toTimeString()} \nListening on ${host}:${port}`)});
@@ -42,6 +42,7 @@ app.get("/playlist", (req, res) => {
 });
 
 setInterval(()=>{console.log("Refreshing playlist...");
+  // TODO: move that also in function, it is messy!
                  var link = "http://telego477.com";
 rp(link)
   .then(html => {
@@ -92,7 +93,7 @@ rp(link)
         values.filter(x => x !== undefined).length
       );
       templateToWrite.push(
-        "#EXTM3U\r\n" +"#EXTINF:0,K1\r\nhttps://edge1.iptv.macc.com.ua/life/k1_3/index.m3u8"+"#EXTINF:0,M2\r\nhttp://live.m2.tv:80/hls3/stream.m3u8"+ values.filter(x => x !== undefined).join("")
+        "#EXTM3U\r\n" +"\r\n#EXTINF:0,K1\r\nhttps://edge1.iptv.macc.com.ua/life/k1_3/index.m3u8\r\n"+"\r\n#EXTINF:0,M2\r\nhttp://live.m2.tv:80/hls3/stream.m3u8\r\n"+ values.filter(x => x !== undefined).join("")
       );
     })
     .then(() => {
