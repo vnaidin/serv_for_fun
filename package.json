@@ -4,7 +4,7 @@
   "description": "Experimenting with old node version, but notebook serves as real server",
   "main": "index.js",
   "scripts": {
-    "start": "index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js -w"
   },
