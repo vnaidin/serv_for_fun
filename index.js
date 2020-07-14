@@ -8,6 +8,32 @@ var createPlaylistFile = require("./functions/createPlaylistFile");
 var app = express();
 var host = "0.0.0.0";
 var port = 3030;
+var ifaces = os.networkInterfaces();
+
+let ipSet=()=> {
+	let ip=undefined
+	Object.keys(ifaces).forEach(function (ifname) {
+  var alias = 0;
+
+  ifaces[ifname].forEach(function (iface) {
+    if ('IPv4' !== iface.family || iface.internal !== false) {
+      // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+      return;
+    }
+
+    if (alias >= 1) {
+      // this single interface has multiple ipv4 addresses
+      //console.log(ifname + ':' + alias, iface.address);
+    } else {
+      // this interface has only one ipv4 adress
+      //console.log(ifname, iface.address);
+      ip=iface.address;
+    }
+    ++alias;
+  });
+});
+return ip
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,9 +51,10 @@ app.use(allowCrossDomain);
 /* TODO: add public folder with  html player, and possibility to switch the channels*/
 
 app.listen(port, host, function () {
+	
   console.log(
     `Server started at ${new Date().toTimeString()} \nListening on ${
-      Object.values(os.networkInterfaces())[0][1].address
+      ipSet()
     }:${port}`
   );
 });
