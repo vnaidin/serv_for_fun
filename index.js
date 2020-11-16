@@ -30,5 +30,5 @@ app.listen(port, host, function () {
 app.get('/playlist', (req, res) => {
 	console.log(`Requested playlist at ${new Date() /* .toTimeString() */}`);
 	res.download('./data/playlist.m3u', 'playlist.m3u');
-	createPlaylistFile('http://telego919.com/');
+	createPlaylistFile('http://telego919.com');
 });
