@@ -10,7 +10,7 @@ const getIp = require('./functions/getIp');
 
 const app = express();
 const host = '0.0.0.0';
-const port = 3030;
+const port = process.env.PORT || 3030;
 const ifaces = os.networkInterfaces();
 
 app.use(cors());
@@ -27,7 +27,7 @@ app.listen(port, host, function () {
 	);
 });
 
-app.get('/', (req, res) => {
+app.get('/playlist', (req, res) => {
 	console.log(`Requested playlist at ${new Date() /* .toTimeString() */}`);
 	res.download('./data/playlist.m3u', 'playlist.m3u');
 	createPlaylistFile('http://telego919.com');
